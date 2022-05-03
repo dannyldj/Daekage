@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Daekage", "Daekage\Daekage.csproj", "{78F1B0B3-AAA6-41DA-AFB3-1554599A8455}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Daekage.Core", "Daekage.Core\Daekage.Core.csproj", "{F4D1E5ED-3A36-47C2-91CB-DA269FA1535F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78F1B0B3-AAA6-41DA-AFB3-1554599A8455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78F1B0B3-AAA6-41DA-AFB3-1554599A8455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78F1B0B3-AAA6-41DA-AFB3-1554599A8455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78F1B0B3-AAA6-41DA-AFB3-1554599A8455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D1E5ED-3A36-47C2-91CB-DA269FA1535F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D1E5ED-3A36-47C2-91CB-DA269FA1535F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D1E5ED-3A36-47C2-91CB-DA269FA1535F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D1E5ED-3A36-47C2-91CB-DA269FA1535F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02C9BA6C-735D-463B-A5C8-B4DB248F926F}
+	EndGlobalSection
+EndGlobal
