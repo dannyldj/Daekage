@@ -2,9 +2,9 @@
 
 namespace Daekage.Views
 {
-    public partial class MainPage : UserControl
+    public partial class BambooPage : UserControl
     {
-        public MainPage()
+        public BambooPage()
         {
             InitializeComponent();
         }

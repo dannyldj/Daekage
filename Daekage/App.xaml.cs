@@ -70,8 +70,11 @@ namespace Daekage
             containerRegistry.Register<IThemeSelectorService, ThemeSelectorService>();
 
             // Views
+            containerRegistry.RegisterForNavigation<MorePage, MoreViewModel>(PageKeys.More);
+            containerRegistry.RegisterForNavigation<BambooPage, BambooViewModel>(PageKeys.Bamboo);
+            containerRegistry.RegisterForNavigation<ChatPage, ChatViewModel>(PageKeys.Chat);
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>(PageKeys.Settings);
-            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);
+            containerRegistry.RegisterForNavigation<NoticePage, NoticeViewModel>(PageKeys.Notice);
             containerRegistry.RegisterForNavigation<ShellWindow, ShellViewModel>();
 
             // Configuration

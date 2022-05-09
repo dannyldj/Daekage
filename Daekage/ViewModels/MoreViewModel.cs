@@ -4,9 +4,9 @@ using Prism.Mvvm;
 
 namespace Daekage.ViewModels
 {
-    public class MainViewModel : BindableBase
+    public class MoreViewModel : BindableBase
     {
-        public MainViewModel()
+        public MoreViewModel()
         {
         }
     }

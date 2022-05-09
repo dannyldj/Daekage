@@ -41,7 +41,10 @@ namespace Daekage.ViewModels
         // TODO WTS: Change the icons and titles for all HamburgerMenuItems here.
         public ObservableCollection<HamburgerMenuItem> MenuItems { get; } = new ObservableCollection<HamburgerMenuItem>()
         {
-            new HamburgerMenuGlyphItem() { Label = Resources.ShellMainPage, Glyph = "\uE8A5", Tag = PageKeys.Main },
+            new HamburgerMenuGlyphItem() { Label = Resources.ShellNoticePage, Glyph = "\uE718", Tag = PageKeys.Notice },
+            new HamburgerMenuGlyphItem() { Label = Resources.ShellChatPage, Glyph = "\uE8F2", Tag = PageKeys.Chat },
+            new HamburgerMenuGlyphItem() { Label = Resources.ShellBambooPage, Glyph = "\uE716", Tag = PageKeys.Bamboo },
+            new HamburgerMenuGlyphItem() { Label = Resources.ShellMorePage, Glyph = "\uE712", Tag = PageKeys.More },
         };
 
         public ObservableCollection<HamburgerMenuItem> OptionMenuItems { get; } = new ObservableCollection<HamburgerMenuItem>()
