@@ -143,7 +143,7 @@
     <value>Settings</value>
   </data>
   <data name="SettingsPageAboutText" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <value>I don't want to read Karen's comments</value>
   </data>
   <data name="SettingsPageAboutTitle" xml:space="preserve">
     <value>About this application</value>
@@ -181,13 +181,7 @@
   <data name="AppDisplayName" xml:space="preserve">
     <value>Daekage</value>
   </data>
-  <data name="ShellBambooPage" xml:space="preserve">
-    <value>Bamboo</value>
-  </data>
-  <data name="ShellChatPage" xml:space="preserve">
-    <value>Chat</value>
-  </data>
-  <data name="ShellMorePage" xml:space="preserve">
-    <value>More</value>
+  <data name="InputPlaceholder" xml:space="preserve">
+    <value>Please enter the contents</value>
   </data>
 </root>

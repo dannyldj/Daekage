@@ -7,13 +7,17 @@
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:properties="clr-namespace:Daekage.Properties"
+    xmlns:helpers="clr-namespace:Daekage.Helpers"
+    xmlns:viewmodels="clr-namespace:Daekage.ViewModels"
     xmlns:templateSelectors="clr-namespace:Daekage.TemplateSelectors"
     Style="{StaticResource CustomMetroWindow}"
+    d:DataContext="{d:DesignInstance d:Type=viewmodels:ShellViewModel}"
     mc:Ignorable="d"
     MinWidth="450"
     MinHeight="800"
     Title="{x:Static properties:Resources.AppDisplayName}"
-    MouseDown="ShellWindow_OnMouseDown">
+    MouseDown="ShellWindow_OnMouseDown"
+    helpers:FocusVisualTreeChanger.IsChanged="True">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
@@ -96,7 +100,7 @@
             x:Name="hamburgerMenu"
             HamburgerButtonName="{x:Static properties:Resources.ShellHamburgerButtonName}"
             IsPaneOpen="False"
-            DisplayMode="CompactInline"
+            DisplayMode="CompactOverlay"
             ItemsSource="{Binding MenuItems}"
             SelectedItem="{Binding SelectedMenuItem}"
             ItemCommand="{Binding MenuItemInvokedCommand}"
@@ -106,7 +110,8 @@
             OptionsItemTemplateSelector="{StaticResource MenuItemTemplateSelector}"
             ItemTemplateSelector="{StaticResource MenuItemTemplateSelector}">
             <controls:HamburgerMenu.Content>
-                <ContentControl x:Name="hamburgerMenuContentControl" />
+                <ContentControl x:Name="hamburgerMenuContentControl" 
+                                Margin="{StaticResource MediumTopMargin}"/>
             </controls:HamburgerMenu.Content>
         </controls:HamburgerMenu>
     </controls:MetroWindow.Content>

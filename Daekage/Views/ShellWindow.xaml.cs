@@ -1,8 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using Daekage.Constants;
-
 using MahApps.Metro.Controls;
-
 using Prism.Regions;
 
 namespace Daekage.Views
@@ -18,7 +17,7 @@ namespace Daekage.Views
 
         private void ShellWindow_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left) this.DragMove();
+            if (e.ChangedButton == MouseButton.Left) DragMove();
         }
     }
 }

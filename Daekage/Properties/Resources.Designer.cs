@@ -70,6 +70,42 @@ namespace Daekage.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bamboo.
+        /// </summary>
+        public static string BambooPageTitle {
+            get {
+                return ResourceManager.GetString("BambooPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string ChatPageTitle {
+            get {
+                return ResourceManager.GetString("ChatPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string InputPlaceholder {
+            get {
+                return ResourceManager.GetString("InputPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More.
+        /// </summary>
+        public static string MorePageTitle {
+            get {
+                return ResourceManager.GetString("MorePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notice.
         /// </summary>
         public static string NoticePageTitle {
@@ -219,33 +255,6 @@ namespace Daekage.Properties {
         public static string ShellSettingsPage {
             get {
                 return ResourceManager.GetString("ShellSettingsPage", resourceCulture);
-            }
-        }
-    
-        /// <summary>
-        ///   Looks up a localized string similar to Chat.
-        /// </summary>
-        public static string ChatPageTitle {
-            get {
-                return ResourceManager.GetString("ChatPageTitle", resourceCulture);
-            }
-        }
-    
-        /// <summary>
-        ///   Looks up a localized string similar to Bamboo.
-        /// </summary>
-        public static string BambooPageTitle {
-            get {
-                return ResourceManager.GetString("BambooPageTitle", resourceCulture);
-            }
-        }
-    
-        /// <summary>
-        ///   Looks up a localized string similar to More.
-        /// </summary>
-        public static string MorePageTitle {
-            get {
-                return ResourceManager.GetString("MorePageTitle", resourceCulture);
             }
         }
     }

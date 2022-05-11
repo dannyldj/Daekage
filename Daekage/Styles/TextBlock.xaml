@@ -18,6 +18,7 @@
 
     <Style x:Key="PageTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontSize" Value="{StaticResource XLargeFontSize}" />
+        <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="{StaticResource MediumLeftMargin}" />
     </Style>
