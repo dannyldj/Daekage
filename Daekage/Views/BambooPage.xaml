@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:properties="clr-namespace:Daekage.Properties"
-    xmlns:helpers="clr-namespace:Daekage.Helpers"
+    xmlns:helpers="clr-namespace:Daekage.ControlProperties"
     xmlns:models="clr-namespace:Daekage.Core.Models;assembly=Daekage.Core"
     xmlns:viewmodels="clr-namespace:Daekage.ViewModels"
     Style="{StaticResource BaseUserControlStyle}"

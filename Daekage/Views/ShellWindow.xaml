@@ -7,7 +7,7 @@
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:properties="clr-namespace:Daekage.Properties"
-    xmlns:helpers="clr-namespace:Daekage.Helpers"
+    xmlns:helpers="clr-namespace:Daekage.ControlProperties"
     xmlns:viewmodels="clr-namespace:Daekage.ViewModels"
     xmlns:templateSelectors="clr-namespace:Daekage.TemplateSelectors"
     Style="{StaticResource CustomMetroWindow}"
