@@ -63,6 +63,7 @@ namespace Daekage
         {
             // Core Services
             containerRegistry.Register<IFileService, FileService>();
+            containerRegistry.Register<IRestService, RestService>();
 
             // App Services
             containerRegistry.Register<IApplicationInfoService, ApplicationInfoService>();
