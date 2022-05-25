@@ -7,7 +7,7 @@
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:properties="clr-namespace:Daekage.Properties"
-    xmlns:helpers="clr-namespace:Daekage.ControlProperties"
+    xmlns:dp="clr-namespace:Daekage.ControlProperties"
     xmlns:viewmodels="clr-namespace:Daekage.ViewModels"
     xmlns:templateSelectors="clr-namespace:Daekage.TemplateSelectors"
     Style="{StaticResource CustomMetroWindow}"
@@ -17,7 +17,7 @@
     MinHeight="800"
     Title="{x:Static properties:Resources.AppDisplayName}"
     MouseDown="ShellWindow_OnMouseDown"
-    helpers:FocusVisualTreeChanger.IsChanged="True">
+    dp:FocusVisualTreeChanger.IsChanged="True">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />

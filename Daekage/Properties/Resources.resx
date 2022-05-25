@@ -184,4 +184,13 @@
   <data name="InputPlaceholder" xml:space="preserve">
     <value>Please enter the contents</value>
   </data>
+  <data name="LogoutMessage" xml:space="preserve">
+      <value>You are logged out for security{0}Please log in again</value>
+  </data>
+  <data name="LogoutBtn" xml:space="preserve">
+      <value>Logout</value>
+  </data>
+  <data name="InvalidAccMessage" xml:space="preserve">
+      <value>Invalid account{0}Please log in with your school account</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -17,7 +18,7 @@ using Daekage.ViewModels;
 using Daekage.Views;
 
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Win32;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Unity;
@@ -70,6 +71,7 @@ namespace Daekage
             containerRegistry.Register<ISystemService, SystemService>();
             containerRegistry.Register<IPersistAndRestoreService, PersistAndRestoreService>();
             containerRegistry.Register<IThemeSelectorService, ThemeSelectorService>();
+            containerRegistry.Register<IOAuthService, OAuthService>();
 
             // Views
             containerRegistry.RegisterForNavigation<MorePage, MoreViewModel>(PageKeys.More);

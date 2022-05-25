@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
+using System.Windows;
 using System.Windows.Input;
 
 using Daekage.Constants;
+using Daekage.Contracts.Services;
 using Daekage.Properties;
 
 using MahApps.Metro.Controls;
@@ -17,6 +20,7 @@ namespace Daekage.ViewModels
     public class ShellViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IOAuthService _oAuthService;
         private IRegionNavigationService _navigationService;
         private HamburgerMenuItem _selectedMenuItem;
         private HamburgerMenuItem _selectedOptionsMenuItem;
@@ -28,14 +32,14 @@ namespace Daekage.ViewModels
 
         public HamburgerMenuItem SelectedMenuItem
         {
-            get { return _selectedMenuItem; }
-            set { SetProperty(ref _selectedMenuItem, value); }
+            get => _selectedMenuItem;
+            set => SetProperty(ref _selectedMenuItem, value);
         }
 
         public HamburgerMenuItem SelectedOptionsMenuItem
         {
-            get { return _selectedOptionsMenuItem; }
-            set { SetProperty(ref _selectedOptionsMenuItem, value); }
+            get => _selectedOptionsMenuItem;
+            set => SetProperty(ref _selectedOptionsMenuItem, value);
         }
 
         // TODO WTS: Change the icons and titles for all HamburgerMenuItems here.
@@ -52,26 +56,36 @@ namespace Daekage.ViewModels
             new HamburgerMenuGlyphItem() { Label = Resources.ShellSettingsPage, Glyph = "\uE713", Tag = PageKeys.Settings }
         };
 
-        public DelegateCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new DelegateCommand(OnGoBack, CanGoBack));
+        public DelegateCommand GoBackCommand => _goBackCommand ??= new DelegateCommand(OnGoBack, CanGoBack);
 
-        public ICommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new DelegateCommand(OnLoaded));
+        public ICommand LoadedCommand => _loadedCommand ??= new DelegateCommand(OnLoaded);
 
-        public ICommand UnloadedCommand => _unloadedCommand ?? (_unloadedCommand = new DelegateCommand(OnUnloaded));
+        public ICommand UnloadedCommand => _unloadedCommand ??= new DelegateCommand(OnUnloaded);
 
-        public ICommand MenuItemInvokedCommand => _menuItemInvokedCommand ?? (_menuItemInvokedCommand = new DelegateCommand(OnMenuItemInvoked));
+        public ICommand MenuItemInvokedCommand => _menuItemInvokedCommand ??= new DelegateCommand(OnMenuItemInvoked);
 
-        public ICommand OptionsMenuItemInvokedCommand => _optionsMenuItemInvokedCommand ?? (_optionsMenuItemInvokedCommand = new DelegateCommand(OnOptionsMenuItemInvoked));
+        public ICommand OptionsMenuItemInvokedCommand => _optionsMenuItemInvokedCommand ??= new DelegateCommand(OnOptionsMenuItemInvoked);
 
-        public ShellViewModel(IRegionManager regionManager)
+        public ShellViewModel(IRegionManager regionManager, IOAuthService oAuthService)
         {
             _regionManager = regionManager;
+            _oAuthService = oAuthService;
         }
 
-        private void OnLoaded()
+        private async void OnLoaded()
         {
             _navigationService = _regionManager.Regions[Regions.Main].NavigationService;
             _navigationService.Navigated += OnNavigated;
             SelectedMenuItem = MenuItems.First();
+
+            try
+            {
+                await _oAuthService.UserinfoCall();
+            }
+            catch (WebException)
+            {
+                _ = MessageBox.Show(string.Format(Resources.LogoutMessage, Environment.NewLine));
+            }
         }
 
         private void OnUnloaded()

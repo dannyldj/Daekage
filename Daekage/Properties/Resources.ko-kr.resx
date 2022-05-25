@@ -24,7 +24,7 @@
     <value>공지</value>
   </data>
   <data name="SettingsPageAboutText" xml:space="preserve">
-    <value>저희는 아줌마들의 글을 읽기 싫어요</value>
+    <value>이건 우리만의 커뮤니티</value>
   </data>
   <data name="SettingsPageAboutTitle" xml:space="preserve">
     <value>정보</value>
@@ -74,4 +74,13 @@
   <data name="InputPlaceholder" xml:space="preserve">
     <value>내용을 입력해주세요</value>
   </data>
+    <data name="LogoutMessage" xml:space="preserve">
+        <value>보안을 위해 로그아웃 되었습니다{0}다시 로그인해주세요</value>
+    </data>
+    <data name="LogoutBtn" xml:space="preserve">
+        <value>로그아웃</value>
+    </data>
+    <data name="InvalidAccMessage" xml:space="preserve">
+        <value>유효하지 않은 계정입니다{0}학교 계정으로 로그인해주세요</value>
+    </data>
 </root>

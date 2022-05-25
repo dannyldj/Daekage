@@ -32,6 +32,55 @@
                 x:Name="ContentArea"
                 Margin="{StaticResource MediumLeftRightMargin}">
 
+                <!--TODO: Insert Style-->
+                <ContentControl Content="{Binding}">
+                    <ContentControl.Style>
+                        <Style TargetType="{x:Type ContentControl}">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <Button
+                                            Content="Google Login"
+                                            Command="{Binding GoogleAuthCommand}" />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsThereInfo}"
+                                    Value="True">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Image Source="{Binding Userinfo.Picture}" />
+                                                    <StackPanel
+                                                        Grid.Column="1"
+                                                        VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Userinfo.Name}" />
+                                                        <TextBlock Text="{Binding Userinfo.Email}" />
+                                                    </StackPanel>
+                                                    <Button
+                                                        Grid.Column="2" 
+                                                        Content="{x:Static properties:Resources.LogoutBtn}"
+                                                        Command="{Binding LogoutCommand}"
+                                                        VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+
                 <TextBlock
                     Margin="{StaticResource SmallTopMargin}"
                     Style="{StaticResource SubtitleTextStyle}"

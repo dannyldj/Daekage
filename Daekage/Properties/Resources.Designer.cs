@@ -88,11 +88,38 @@ namespace Daekage.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Please enter the contents.
         /// </summary>
         public static string InputPlaceholder {
             get {
                 return ResourceManager.GetString("InputPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string InvalidAccMessage {
+            get {
+                return ResourceManager.GetString("InvalidAccMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string LogoutBtn {
+            get {
+                return ResourceManager.GetString("LogoutBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are logged out for security\rPlease log in again.
+        /// </summary>
+        public static string LogoutMessage {
+            get {
+                return ResourceManager.GetString("LogoutMessage", resourceCulture);
             }
         }
         
@@ -115,7 +142,7 @@ namespace Daekage.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings page placeholder text.  Your app description goes here..
+        ///   Looks up a localized string similar to I don&apos;t want to read Karen&apos;s comments.
         /// </summary>
         public static string SettingsPageAboutText {
             get {
