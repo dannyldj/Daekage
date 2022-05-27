@@ -17,14 +17,19 @@
             Style="{StaticResource PageTitleStyle}"
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.MorePageTitle}" />
-        <Grid
-            Grid.Row="1"
-            Margin="{StaticResource MediumLeftRightMargin}"
-            Background="{DynamicResource MahApps.Brushes.Gray10}">
-            <!--
-            The Mahapps Gray10 color represents where you should place your content.
-            Place your content here.
-            -->
-        </Grid>
+        <StackPanel Grid.Row="1">
+            <UniformGrid
+                Columns="4"
+                Margin="{StaticResource MediumLeftRightMargin}">
+                <Button Content="머머리" />
+                <Button Content="머머리" />
+                <Button Content="머머리" />
+                <Button Content="머머리" />
+                <Button Content="머머리" />
+                <Button Content="머머리" />
+                <Button Content="머머리" />
+                <Button Content="머머리" />
+            </UniformGrid>
+        </StackPanel>
     </Grid>
 </UserControl>
