@@ -30,7 +30,13 @@
     <Thickness x:Key="XXSmallTopMargin">0, 4, 0, 0</Thickness>
     <Thickness x:Key="XXSmallRightMargin">0, 0, 4, 0</Thickness>
 
-    <!--3 Extra Small size margins-->
+    <!--3Extra Small size margins-->
     <Thickness x:Key="XXXSmallBottomMargin">0, 0, 0, 2</Thickness>
+
+    <!--Thin Border Thickness-->
+    <Thickness x:Key="ThinTopLine">0, 1, 0, 0</Thickness>
+
+    <!--None Thickness-->
+    <Thickness x:Key="NoneLine">0, 0, 0, 0</Thickness>
 
 </ResourceDictionary>

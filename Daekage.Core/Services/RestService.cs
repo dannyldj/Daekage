@@ -14,16 +14,17 @@ namespace Daekage.Core.Services
     {
         private readonly RestClient _client = new RestClient("http://52.79.163.97:5000/");
 
-        public async Task<T> RestRequest<T>(Method method, string route, JObject body)
+        public async Task<T> RestRequest<T>(Method method, string route, object body)
         {
             var request = new RestRequest(route, method);
             _ = request.AddHeader("Content-Type", "application/json");
 
             if (body != null)
-                _ = request.AddParameter("application/json", body, ParameterType.RequestBody);
+                _ = request.AddBody(JsonConvert.SerializeObject(body), "application/json");
 
             var result = await _client.ExecuteAsync<T>(request);
-            return result.Data;
+
+            return result.IsSuccessful ? result.Data : default;
         }
     }
 }

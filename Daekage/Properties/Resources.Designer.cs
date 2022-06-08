@@ -97,7 +97,7 @@ namespace Daekage.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Invalid account{0}Please log in with your school account.
         /// </summary>
         public static string InvalidAccMessage {
             get {
@@ -115,7 +115,7 @@ namespace Daekage.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are logged out for security\rPlease log in again.
+        ///   Looks up a localized string similar to You are logged out for security{0}Please log in again.
         /// </summary>
         public static string LogoutMessage {
             get {
@@ -133,11 +133,30 @@ namespace Daekage.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string NetworkErrorMessage {
+            get {
+                return ResourceManager.GetString("NetworkErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notice.
         /// </summary>
         public static string NoticePageTitle {
             get {
                 return ResourceManager.GetString("NoticePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] SendIcon {
+            get {
+                object obj = ResourceManager.GetObject("SendIcon", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

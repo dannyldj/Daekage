@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:properties="clr-namespace:Daekage.Properties"
     xmlns:models="clr-namespace:Daekage.Core.Models;assembly=Daekage.Core"
     xmlns:viewmodels="clr-namespace:Daekage.ViewModels"
@@ -20,67 +22,130 @@
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <TextBlock
             Style="{StaticResource PageTitleStyle}"
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.NoticePageTitle}" />
-        <ScrollViewer
-            Grid.Row="1"
-            VerticalScrollBarVisibility="Auto"
-            Margin="{StaticResource SmallLeftTopRightMargin}">
-            <ItemsControl
-                ItemsSource="{Binding NoticeList}"
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ScrollViewer
+                VerticalScrollBarVisibility="Auto"
                 Margin="{StaticResource SmallLeftTopRightMargin}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="models:NoticeModel">
-                        <StackPanel>
-                            <TextBlock
-                                Text="{Binding Writer}"
-                                FontSize="{StaticResource SmallFontSize}"
-                                FontWeight="SemiBold"
-                                Style="{StaticResource BaseTextBlockStyle}"
-                                Margin="{StaticResource XXXSmallBottomMargin}"/>
-                            <TextBlock
-                                Text="{Binding Date}"
-                                FontSize="{StaticResource SmallFontSize}"
-                                Style="{StaticResource BaseTextBlockStyle}"
-                                Margin="{StaticResource SmallBottomMargin}"
-                                Opacity="0.5"/>
-                            <ItemsControl
-                                ItemsSource="{Binding Files}"
-                                Visibility="{Binding IsFilesEmpty,
-                                    Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Margin="{StaticResource SmallBottomMargin}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            BorderThickness="0.5"
-                                            Margin="{StaticResource XXSmallRightMargin}">
-                                            <TextBlock
-                                                Text="{Binding}"
-                                                FontSize="{StaticResource SmallFontSize}"
-                                                FontWeight="Medium"/>
-                                        </Button>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <TextBlock
-                                Text="{Binding Text}"
-                                FontWeight="SemiBold"
-                                Style="{StaticResource BaseTextBlockStyle}"
-                                Margin="{StaticResource SmallBottomMargin}"/>
-                            <Separator
-                                Opacity="0.5"
-                                Margin="{StaticResource SmallBottomMargin}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                <ItemsControl
+                    ItemsSource="{Binding NoticeList}"
+                    Margin="{StaticResource SmallLeftTopRightMargin}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="models:NoticeModel">
+                            <StackPanel>
+                                <TextBlock
+                                    Text="{Binding Writer}"
+                                    FontSize="{StaticResource SmallFontSize}"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Margin="{StaticResource XXXSmallBottomMargin}"/>
+                                <TextBlock
+                                    Text="{Binding Date}"
+                                    FontSize="{StaticResource SmallFontSize}"
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Margin="{StaticResource SmallBottomMargin}"
+                                    Opacity="0.5"/>
+                                <ItemsControl
+                                    ItemsSource="{Binding Files}"
+                                    Visibility="{Binding IsFilesEmpty,
+                                        Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Margin="{StaticResource SmallBottomMargin}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                BorderThickness="0.5"
+                                                Margin="{StaticResource XXSmallRightMargin}">
+                                                <TextBlock
+                                                    Text="{Binding}"
+                                                    FontSize="{StaticResource SmallFontSize}"
+                                                    FontWeight="Medium"/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBlock
+                                    Text="{Binding Text}"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Margin="{StaticResource SmallBottomMargin}"/>
+                                <Separator
+                                    Opacity="0.5"
+                                    Margin="{StaticResource SmallBottomMargin}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Grid Grid.Row="1">
+                <Border Padding="{StaticResource SmallLeftTopRightBottomMargin}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox
+                            Text="{Binding InputMessage,
+                                UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource BaseTextBoxStyle}" >
+                            <i:Interaction.Triggers>
+                                <i:KeyTrigger Key="Enter" >
+                                    <i:InvokeCommandAction Command="{Binding SendCommand}" />
+                                </i:KeyTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                        <Button
+                            Grid.Column="1"
+                            Command="{Binding SendCommand}"
+                            Margin="{StaticResource SmallLeftMargin}">
+                            <Button.Style>
+                                <Style
+                                    TargetType="{x:Type Button}"
+                                    BasedOn="{StaticResource ClearButtonStyle}">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <controls:FontIcon
+                                                Glyph="&#xE724;"
+                                                Opacity="0.8" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Content">
+                                                <Setter.Value>
+                                                    <controls:FontIcon
+                                                        Glyph="&#xE725;"
+                                                        Opacity="0.8" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <Border
+                    Opacity="0.5" BorderThickness="{StaticResource ThinTopLine}"
+                    BorderBrush="{StaticResource MahApps.Brushes.Button.Border}" />
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -6,6 +6,6 @@ namespace Daekage.Core.Contracts.Services
 {
     public interface IRestService
     {
-        Task<T> RestRequest<T>(Method method, string route, JObject body);
+        Task<T> RestRequest<T>(Method method, string route, object body);
     }
 }

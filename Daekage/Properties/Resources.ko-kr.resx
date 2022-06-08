@@ -83,4 +83,7 @@
     <data name="InvalidAccMessage" xml:space="preserve">
         <value>유효하지 않은 계정입니다{0}학교 계정으로 로그인해주세요</value>
     </data>
+    <data name="NetworkErrorMessage" xml:space="preserve">
+        <value>네트워크 오류</value>
+    </data>
 </root>
