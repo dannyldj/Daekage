@@ -199,4 +199,7 @@
   <data name="NetworkErrorMessage" xml:space="preserve">
       <value>Network Error!</value>
   </data>
+  <data name="PostBtn" xml:space="preserve">
+      <value>Post</value>
+  </data>
 </root>

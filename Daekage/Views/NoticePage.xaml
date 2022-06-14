@@ -5,7 +5,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:properties="clr-namespace:Daekage.Properties"
     xmlns:models="clr-namespace:Daekage.Core.Models;assembly=Daekage.Core"
     xmlns:viewmodels="clr-namespace:Daekage.ViewModels"
@@ -29,11 +28,6 @@
             Text="{x:Static properties:Resources.NoticePageTitle}" />
 
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
             <ScrollViewer
                 VerticalScrollBarVisibility="Auto"
                 Margin="{StaticResource SmallLeftTopRightMargin}">
@@ -92,60 +86,27 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <Grid Grid.Row="1">
-                <Border Padding="{StaticResource SmallLeftTopRightBottomMargin}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBox
-                            Text="{Binding InputMessage,
-                                UpdateSourceTrigger=PropertyChanged}"
-                            Style="{StaticResource BaseTextBoxStyle}" >
-                            <i:Interaction.Triggers>
-                                <i:KeyTrigger Key="Enter" >
-                                    <i:InvokeCommandAction Command="{Binding SendCommand}" />
-                                </i:KeyTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-                        <Button
-                            Grid.Column="1"
-                            Command="{Binding SendCommand}"
-                            Margin="{StaticResource SmallLeftMargin}">
-                            <Button.Style>
-                                <Style
-                                    TargetType="{x:Type Button}"
-                                    BasedOn="{StaticResource ClearButtonStyle}">
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <controls:FontIcon
-                                                Glyph="&#xE724;"
-                                                Opacity="0.8" />
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <controls:FontIcon
-                                                        Glyph="&#xE725;"
-                                                        Opacity="0.8" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </Grid>
-                </Border>
-
-                <Border
-                    Opacity="0.5" BorderThickness="{StaticResource ThinTopLine}"
-                    BorderBrush="{StaticResource MahApps.Brushes.Button.Border}" />
-            </Grid>
+            <Button
+                Command="{Binding NavigatePostPageCommand}"
+                Height="50" Width="50"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                BorderThickness="{StaticResource NoneLine}"
+                Background="{DynamicResource MahApps.Brushes.Accent}"
+                Margin="{StaticResource MediumRightBottomMargin}">
+                <controls:FontIcon
+                    Glyph="&#xE710;"
+                    Foreground="{DynamicResource MahApps.Brushes.Control.Background}" />
+                <Button.Style>
+                    <Style
+                        TargetType="{x:Type Button}"
+                        BasedOn="{StaticResource OverHandButtonStyle}">
+                        <Setter
+                            Property="Border.CornerRadius"
+                            Value="100" />
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

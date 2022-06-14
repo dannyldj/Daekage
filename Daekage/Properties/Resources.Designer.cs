@@ -133,7 +133,7 @@ namespace Daekage.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Network Error!.
         /// </summary>
         public static string NetworkErrorMessage {
             get {
@@ -147,6 +147,15 @@ namespace Daekage.Properties {
         public static string NoticePageTitle {
             get {
                 return ResourceManager.GetString("NoticePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PostBtn {
+            get {
+                return ResourceManager.GetString("PostBtn", resourceCulture);
             }
         }
         

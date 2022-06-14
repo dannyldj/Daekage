@@ -20,7 +20,6 @@
                 <ResourceDictionary Source="/Styles/TextBlock.xaml" />
                 <ResourceDictionary Source="/Styles/TextBox.xaml" />
                 <ResourceDictionary Source="/Styles/UserControl.xaml" />
-                <ResourceDictionary Source="/Styles/WatermarkTextBlock.xaml" />
                 <!--
                 MahApps.Metro resource dictionaries.
                 Learn more about using MahApps.Metro at https://mahapps.com/

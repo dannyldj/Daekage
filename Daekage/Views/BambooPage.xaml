@@ -16,53 +16,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="48" />
         </Grid.RowDefinitions>
         <TextBlock
             Style="{StaticResource PageTitleStyle}"
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.BambooPageTitle}" />
-        <ScrollViewer
-            Grid.Row="1"
-            VerticalScrollBarVisibility="Auto"
-            Margin="{StaticResource MediumLeftRightMargin}">
-            <ItemsControl ItemsSource="{Binding BambooList}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="models:BambooModel">
-                        <StackPanel>
-                            <TextBlock Text="익명"
-                                       FontSize="{StaticResource SmallFontSize}"
-                                       FontWeight="SemiBold"
-                                       Style="{StaticResource BaseTextBlockStyle}"
-                                       Margin="{StaticResource MediumTopMargin}"/>
-                            <TextBlock Text="{Binding Date}"
-                                       FontSize="{StaticResource SmallFontSize}"
-                                       Style="{StaticResource BaseTextBlockStyle}"
-                                       Margin="{StaticResource XXXSmallTopMargin}"
-                                       Opacity="0.5"/>
-                            <TextBlock Text="{Binding Text}"
-                                       FontWeight="SemiBold"
-                                       Style="{StaticResource BaseTextBlockStyle}"
-                                       Margin="{StaticResource SmallTopMargin}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="64" />
-            </Grid.ColumnDefinitions>
-
-            <TextBox
-                Text="{Binding InputText}"
-                Tag="{x:Static properties:Resources.InputPlaceholder}"
-                Style="{StaticResource WatermarkTextBox}">
-            </TextBox>
-            <Button
-                Grid.Column="1"
-                Content="전송"/>
-        </Grid>
     </Grid>
 </UserControl>

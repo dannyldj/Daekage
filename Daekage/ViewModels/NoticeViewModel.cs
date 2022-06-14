@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
+using Daekage.Constants;
 using Daekage.Core.Contracts.Services;
 using Daekage.Core.Models;
 using Daekage.Properties;
@@ -16,10 +18,10 @@ namespace Daekage.ViewModels
 {
     public class NoticeViewModel : BindableBase, INavigationAware
     {
+        private readonly IRegionNavigationService _navigationService;
         private readonly IRestService _restService;
         private ObservableCollection<NoticeModel> _noticeList;
-        private string _inputMessage;
-        private DelegateCommand _sendCommand;
+        private ICommand _navigatePostPageCommand;
 
         public ObservableCollection<NoticeModel> NoticeList
         {
@@ -27,21 +29,18 @@ namespace Daekage.ViewModels
             set => SetProperty(ref _noticeList, value);
         }
 
-        public string InputMessage
+        public ICommand NavigatePostPageCommand =>
+            _navigatePostPageCommand ??= new DelegateCommand(OnNavigatePostPageCommand);
+
+        public NoticeViewModel(IRegionManager regionManager, IRestService restService)
         {
-            get => _inputMessage;
-            set
-            {
-                _ = SetProperty(ref _inputMessage, value);
-                SendCommand.RaiseCanExecuteChanged();
-            }
+            _navigationService = regionManager.Regions[Regions.Main].NavigationService;
+            _restService = restService;
         }
 
-        public DelegateCommand SendCommand => _sendCommand ??= new DelegateCommand(OnSendCommand, CanSendCommand);
-
-        public NoticeViewModel(IRestService restService)
+        private void OnNavigatePostPageCommand()
         {
-            _restService = restService;
+            _navigationService.RequestNavigate(PageKeys.PostNotice);
         }
 
         public async void OnNavigatedTo(NavigationContext navigationContext)
@@ -58,29 +57,5 @@ namespace Daekage.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
             => true;
-
-        private async void OnSendCommand() {
-            if (!(App.Current.Properties["Userinfo"] is UserinfoModel userInfo)) return;
-
-            var sendObj = new NoticeModel
-            {
-                Writer = userInfo.Name,
-                WriterEmail = userInfo.Email,
-                Date = DateTime.Now.ToString("yyyy년 MM월 dd일 hh:mm"),
-                Text = InputMessage
-            };
-            var result = await _restService.RestRequest<NoticeModel>(Method.Post, "api/Notices", sendObj);
-
-            if (result is null)
-            {
-                _ = MessageBox.Show(Resources.NetworkErrorMessage);
-                return;
-            }
-
-            NoticeList.Add(result);
-            InputMessage = string.Empty;
-        }
-
-        private bool CanSendCommand() => !string.IsNullOrEmpty(InputMessage);
     }
 }

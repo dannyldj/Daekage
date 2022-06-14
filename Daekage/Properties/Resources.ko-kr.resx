@@ -86,4 +86,7 @@
     <data name="NetworkErrorMessage" xml:space="preserve">
         <value>네트워크 오류</value>
     </data>
+    <data name="PostBtn" xml:space="preserve">
+        <value>작성</value>
+    </data>
 </root>

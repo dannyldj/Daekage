@@ -6,6 +6,41 @@
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="BorderThickness" Value="{StaticResource NoneLine}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border Background="{TemplateBinding Background}"
+                            x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}">
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                        <Trigger Property="Width" Value="Auto">
+                            <Setter Property="MinWidth" Value="100" />
+                        </Trigger>
+                        <Trigger Property="Height" Value="Auto">
+                            <Setter Property="MinHeight" Value="20" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BodyTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseTextBoxStyle}">
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="Padding" Value="{StaticResource SmallAroundMargin}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray.SemiTransparent}" />
+        <Setter Property="BorderThickness" Value="{StaticResource ThinAroundLine}" />
+        <Setter Property="Border.CornerRadius" Value="10" />
     </Style>
 
 </ResourceDictionary>

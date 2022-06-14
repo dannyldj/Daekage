@@ -78,6 +78,7 @@ namespace Daekage
             containerRegistry.RegisterForNavigation<BambooPage, BambooViewModel>(PageKeys.Bamboo);
             containerRegistry.RegisterForNavigation<ChatPage, ChatViewModel>(PageKeys.Chat);
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>(PageKeys.Settings);
+            containerRegistry.RegisterForNavigation<PostNoticePage, PostNoticeViewModel>(PageKeys.PostNotice);
             containerRegistry.RegisterForNavigation<NoticePage, NoticeViewModel>(PageKeys.Notice);
             containerRegistry.RegisterForNavigation<ShellWindow, ShellViewModel>();
 
