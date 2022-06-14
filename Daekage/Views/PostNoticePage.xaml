@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:properties="clr-namespace:Daekage.Properties"
-             xmlns:dp="clr-namespace:Daekage.ControlProperties"
+             xmlns:behaviors="clr-namespace:Daekage.Behavior"
              xmlns:viewModels="clr-namespace:Daekage.ViewModels"
              Style="{StaticResource BaseUserControlStyle}"
              d:DataContext="{d:DesignInstance d:Type=viewModels:PostNoticeViewModel}"
@@ -48,11 +48,11 @@
             Style="{StaticResource BodyTextBoxStyle}"
             VerticalScrollBarVisibility="Auto" VerticalAlignment="Top"
             Margin="{StaticResource MediumLeftTopRightMargin}">
-            <dp:WatermarkAdder.Watermark>
+            <behaviors:WatermarkAdder.Watermark>
                 <TextBlock
                     Text="{x:Static properties:Resources.InputPlaceholder}"
                     Style="{StaticResource WatermarkStyle}"/>
-            </dp:WatermarkAdder.Watermark>
+            </behaviors:WatermarkAdder.Watermark>
         </TextBox>
     </Grid>
 </UserControl>

@@ -7,7 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using Daekage.Adorner;
 
-namespace Daekage.ControlProperties
+namespace Daekage.Behavior
 {
     public static class WatermarkAdder
     {

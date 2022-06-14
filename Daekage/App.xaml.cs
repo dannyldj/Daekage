@@ -18,9 +18,7 @@ using Daekage.ViewModels;
 using Daekage.Views;
 
 using Microsoft.Extensions.Configuration;
-using Microsoft.Win32;
 using Prism.Ioc;
-using Prism.Mvvm;
 using Prism.Unity;
 
 namespace Daekage

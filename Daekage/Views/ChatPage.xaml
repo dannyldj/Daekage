@@ -7,7 +7,7 @@
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:properties="clr-namespace:Daekage.Properties"
-    xmlns:dp="clr-namespace:Daekage.ControlProperties"
+    xmlns:behaviors="clr-namespace:Daekage.Behavior"
     xmlns:viewModels="clr-namespace:Daekage.ViewModels"
     Style="{StaticResource BaseUserControlStyle}"
     d:DataContext="{d:DesignInstance d:Type=viewModels:ChatViewModel}"
@@ -58,20 +58,23 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBox
+                            x:Name="MessageTb"
                             Text="{Binding InputMessage,
                                 UpdateSourceTrigger=PropertyChanged}"
+                            KeyDown="MessageTb_OnKeyDown"
+                            KeyUp="MessageTb_OnKeyUp"
                             Style="{StaticResource BaseTextBoxStyle}"
                             MaxHeight="100" VerticalScrollBarVisibility="Auto">
                             <i:Interaction.Triggers>
                                 <i:KeyTrigger Key="Enter" >
-                                    <i:InvokeCommandAction />
+                                    <i:InvokeCommandAction Command="{Binding SendCommand}"/>
                                 </i:KeyTrigger>
                             </i:Interaction.Triggers>
-                            <dp:WatermarkAdder.Watermark>
+                            <behaviors:WatermarkAdder.Watermark>
                                 <TextBlock
                                     Text="{x:Static properties:Resources.InputPlaceholder}"
                                     Style="{StaticResource WatermarkStyle}" />
-                            </dp:WatermarkAdder.Watermark>
+                            </behaviors:WatermarkAdder.Watermark>
                         </TextBox>
                         <Button
                             Grid.Column="1"

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Daekage.ControlProperties
+namespace Daekage.Behavior
 {
     public class FocusVisualTreeChanger
     {
