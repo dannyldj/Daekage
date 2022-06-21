@@ -7,11 +7,11 @@ namespace Daekage.ViewModels
 {
     public class BambooViewModel : BindableBase
     {
-        private ObservableCollection<BambooModel> _bambooList;
-        public ObservableCollection<BambooModel> BambooList
+        private ObservableCollection<BambooItemModel> _bambooItems;
+        public ObservableCollection<BambooItemModel> BambooItems
         {
-            get => _bambooList;
-            set => SetProperty(ref _bambooList, value);
+            get => _bambooItems;
+            set => SetProperty(ref _bambooItems, value);
         }
 
         private string _inputText;
@@ -23,7 +23,7 @@ namespace Daekage.ViewModels
 
         public BambooViewModel()
         {
-            BambooList = new ObservableCollection<BambooModel>();
+            BambooItems = new ObservableCollection<BambooItemModel>();
         }
     }
 }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using System.Windows;
 using System.Windows.Input;
 
 using Daekage.Constants;
-using Daekage.Contracts.Services;
 using Daekage.Properties;
-
 using MahApps.Metro.Controls;
 
 using Prism.Commands;
@@ -20,7 +15,6 @@ namespace Daekage.ViewModels
     public class ShellViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IOAuthService _oAuthService;
         private IRegionNavigationService _navigationService;
         private HamburgerMenuItem _selectedMenuItem;
         private HamburgerMenuItem _selectedOptionsMenuItem;
@@ -66,26 +60,16 @@ namespace Daekage.ViewModels
 
         public ICommand OptionsMenuItemInvokedCommand => _optionsMenuItemInvokedCommand ??= new DelegateCommand(OnOptionsMenuItemInvoked);
 
-        public ShellViewModel(IRegionManager regionManager, IOAuthService oAuthService)
+        public ShellViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            _oAuthService = oAuthService;
         }
 
-        private async void OnLoaded()
+        private void OnLoaded()
         {
             _navigationService = _regionManager.Regions[Regions.Main].NavigationService;
             _navigationService.Navigated += OnNavigated;
             SelectedMenuItem = MenuItems.First();
-
-            try
-            {
-                await _oAuthService.UserinfoCall();
-            }
-            catch (WebException)
-            {
-                _ = MessageBox.Show(string.Format(Resources.LogoutMessage, Environment.NewLine));
-            }
         }
 
         private void OnUnloaded()

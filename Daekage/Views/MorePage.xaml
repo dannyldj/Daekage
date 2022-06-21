@@ -21,14 +21,7 @@
             <UniformGrid
                 Columns="4"
                 Margin="{StaticResource MediumLeftRightMargin}">
-                <Button Content="머머리" />
-                <Button Content="머머리" />
-                <Button Content="머머리" />
-                <Button Content="머머리" />
-                <Button Content="머머리" />
-                <Button Content="머머리" />
-                <Button Content="머머리" />
-                <Button Content="머머리" />
+                <!--TODO: 기능 추가-->
             </UniformGrid>
         </StackPanel>
     </Grid>

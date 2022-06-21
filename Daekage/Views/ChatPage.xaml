@@ -78,31 +78,9 @@
                         </TextBox>
                         <Button
                             Grid.Column="1"
+                            Style="{StaticResource MahApps.Styles.Button.Reveal}"
                             Margin="{StaticResource SmallLeftMargin}">
-                            <Button.Style>
-                                <Style
-                                    TargetType="{x:Type Button}"
-                                    BasedOn="{StaticResource ClearButtonStyle}">
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <controls:FontIcon
-                                                Glyph="&#xE724;"
-                                                Opacity="0.8" />
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <controls:FontIcon
-                                                        Glyph="&#xE725;"
-                                                        Opacity="0.8" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
+                            <controls:FontIcon Glyph="&#xE725;" />
                         </Button>
                     </Grid>
                 </Border>

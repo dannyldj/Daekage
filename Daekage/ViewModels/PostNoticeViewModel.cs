@@ -18,7 +18,7 @@ namespace Daekage.ViewModels
         private readonly IRestService _restService;
         private string _inputMessage;
         private ICommand _backCommand;
-        private DelegateCommand _sendCommand;
+        private DelegateCommand _postCommand;
 
         public string InputMessage
         {
@@ -26,12 +26,12 @@ namespace Daekage.ViewModels
             set
             {
                 _ = SetProperty(ref _inputMessage, value);
-                SendCommand.RaiseCanExecuteChanged();
+                PostCommand.RaiseCanExecuteChanged();
             }
         }
 
         public ICommand BackCommand => _backCommand ??= new DelegateCommand(OnBackCommand);
-        public DelegateCommand SendCommand => _sendCommand ??= new DelegateCommand(OnSendCommand, CanSendCommand);
+        public DelegateCommand PostCommand => _postCommand ??= new DelegateCommand(OnPostCommand, CanPostCommand);
 
         public PostNoticeViewModel(IRegionManager regionManager, IRestService restService)
         {
@@ -44,9 +44,9 @@ namespace Daekage.ViewModels
             _navigationService.Journal.GoBack();
         }
 
-        private async void OnSendCommand()
+        private async void OnPostCommand()
         {
-            if (!(App.Current.Properties["Userinfo"] is UserinfoModel userInfo)) return;
+            if (!(Application.Current.Properties["Userinfo"] is UserinfoModel userInfo)) return;
 
             var sendObj = new NoticeModel
             {
@@ -55,17 +55,15 @@ namespace Daekage.ViewModels
                 Date = DateTime.Now.ToString("yyyy년 MM월 dd일 hh:mm"),
                 Text = InputMessage
             };
-            var result = await _restService.RestRequest<NoticeModel>(Method.Post, "api/Notices", sendObj);
+            bool isSuccess = await _restService.NotReturnRestRequest(Method.Post, "api/Notices", sendObj);
 
-            if (result is null)
-            {
+            if (!isSuccess)
                 _ = MessageBox.Show(Resources.NetworkErrorMessage);
-            }
             
             OnBackCommand();
         }
 
-        private bool CanSendCommand() => !string.IsNullOrEmpty(InputMessage);
+        private bool CanPostCommand() => !string.IsNullOrEmpty(InputMessage);
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {

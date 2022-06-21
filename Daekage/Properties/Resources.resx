@@ -192,14 +192,13 @@
   <data name="InvalidAccMessage" xml:space="preserve">
     <value>Invalid account{0}Please log in with your school account</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SendIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SendIcon.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="NetworkErrorMessage" xml:space="preserve">
       <value>Network Error!</value>
   </data>
   <data name="PostBtn" xml:space="preserve">
       <value>Post</value>
+  </data>
+  <data name="PermissionMessage" xml:space="preserve">
+      <value>You can only modify and delete your own posts</value>
   </data>
 </root>

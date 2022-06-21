@@ -23,20 +23,20 @@
             <Grid>
                 <Button
                     Command="{Binding BackCommand}"
-                    Style="{StaticResource OverHandClearButtonStyle}"
+                    Style="{StaticResource MahApps.Styles.Button.Reveal}"
+                    Background="Transparent"
                     HorizontalAlignment="Left"
                     Margin="{StaticResource MediumLeftMargin}">
                     <controls:FontIcon Glyph="&#xE973;" />
                 </Button>
 
                 <Button 
-                    Command="{Binding SendCommand}"
-                    Style="{StaticResource OverHandClearButtonStyle}"
+                    Content="{x:Static properties:Resources.PostBtn}"
+                    Command="{Binding PostCommand}"
+                    Style="{StaticResource MahApps.Styles.Button.Reveal}"
+                    Background="Transparent"
                     HorizontalAlignment="Right"
                     Margin="{StaticResource MediumRightMargin}">
-                    <TextBlock
-                        Text="{x:Static properties:Resources.PostBtn}"
-                        Style="{StaticResource BaseTextBlockStyle}" />
                 </Button>
             </Grid>
         </Border>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Daekage.Core.Models
 {
-    public class BambooModel
+    public class BambooItemModel
     {
         public string Date { get; set; }
 

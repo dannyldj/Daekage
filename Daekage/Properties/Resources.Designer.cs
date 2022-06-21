@@ -153,19 +153,18 @@ namespace Daekage.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string PostBtn {
+        public static string PermissionMessage {
             get {
-                return ResourceManager.GetString("PostBtn", resourceCulture);
+                return ResourceManager.GetString("PermissionMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to Post.
         /// </summary>
-        public static byte[] SendIcon {
+        public static string PostBtn {
             get {
-                object obj = ResourceManager.GetObject("SendIcon", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("PostBtn", resourceCulture);
             }
         }
         

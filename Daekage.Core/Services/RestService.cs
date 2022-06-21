@@ -1,11 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Daekage.Core.Contracts.Services;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace Daekage.Core.Services
@@ -22,9 +17,23 @@ namespace Daekage.Core.Services
             if (body != null)
                 _ = request.AddBody(JsonConvert.SerializeObject(body), "application/json");
 
-            var result = await _client.ExecuteAsync<T>(request);
+            var data = await _client.ExecuteAsync(request);
+            if (!data.IsSuccessful) return default;
 
-            return result.IsSuccessful ? result.Data : default;
+            var result = JsonConvert.DeserializeObject<T>(data.Content);
+            return result;
+        }
+
+        public async Task<bool> NotReturnRestRequest(Method method, string route, object body)
+        {
+            var request = new RestRequest(route, method);
+            _ = request.AddHeader("Content-Type", "application/json");
+
+            if (body != null)
+                _ = request.AddBody(JsonConvert.SerializeObject(body), "application/json");
+
+            var data = await _client.ExecuteAsync(request);
+            return data.IsSuccessful;
         }
     }
 }

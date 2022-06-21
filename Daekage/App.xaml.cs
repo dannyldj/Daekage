@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Markup;
 using System.Windows.Threading;
 
 using Daekage.Constants;
@@ -48,6 +46,15 @@ namespace Daekage
             var themeSelectorService = Container.Resolve<IThemeSelectorService>();
             themeSelectorService.InitializeTheme();
 
+            try
+            {
+                await OAuthService.UserinfoCall();
+            }
+            catch (WebException)
+            {
+                _ = MessageBox.Show(string.Format(Daekage.Properties.Resources.LogoutMessage, Environment.NewLine));
+            }
+
             base.OnInitialized();
             await Task.CompletedTask;
         }
@@ -69,7 +76,6 @@ namespace Daekage
             containerRegistry.Register<ISystemService, SystemService>();
             containerRegistry.Register<IPersistAndRestoreService, PersistAndRestoreService>();
             containerRegistry.Register<IThemeSelectorService, ThemeSelectorService>();
-            containerRegistry.Register<IOAuthService, OAuthService>();
 
             // Views
             containerRegistry.RegisterForNavigation<MorePage, MoreViewModel>(PageKeys.More);
@@ -93,7 +99,7 @@ namespace Daekage
 
         private IConfiguration BuildConfiguration()
         {
-            var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             return new ConfigurationBuilder()
                 .SetBasePath(appLocation)
                 .AddJsonFile("appsettings.json")
@@ -103,6 +109,7 @@ namespace Daekage
 
         private void OnExit(object sender, ExitEventArgs e)
         {
+            Current.Properties.Remove("Userinfo");
             var persistAndRestoreService = Container.Resolve<IPersistAndRestoreService>();
             persistAndRestoreService.PersistData();
         }

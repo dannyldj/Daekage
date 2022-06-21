@@ -89,4 +89,7 @@
     <data name="PostBtn" xml:space="preserve">
         <value>작성</value>
     </data>
+    <data name="PermissionMessage" xml:space="preserve">
+        <value>자신의 게시물만 수정 및 삭제할 수 있습니다</value>
+    </data>
 </root>

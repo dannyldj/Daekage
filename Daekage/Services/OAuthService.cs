@@ -6,14 +6,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Daekage.Contracts.Services;
+using System.Windows;
 using Daekage.Core.Models;
 using Daekage.Helpers;
 using Newtonsoft.Json;
 
 namespace Daekage.Services
 {
-    public class OAuthService : IOAuthService
+    public class OAuthService
     {
         private const string CLIENT_ID = "245157208637-1pqq50c8tc2r3opji66jtqj1vb3incm2.apps.googleusercontent.com";
         private const string CLIENT_SECRET = "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";
@@ -34,7 +34,7 @@ namespace Daekage.Services
             return port;
         }
 
-        public async Task GoogleAuth()
+        public static async Task GoogleAuth()
         {
             // Generates state and PKCE values.
             string state = UriEncoding.RandomDataBase64Url(32);
@@ -107,10 +107,10 @@ namespace Daekage.Services
             await UserinfoCall();
         }
 
-        public async Task UserinfoCall()
+        public static async Task UserinfoCall()
         {
-            if(App.Current.Properties["AccessToken"] is null) return;
-            App.Current.Properties["Userinfo"] = null;
+            if(Application.Current.Properties["AccessToken"] is null) return;
+            Application.Current.Properties["Userinfo"] = null;
 
             // builds the  request
             const string userinfoRequestUri = "https://www.googleapis.com/oauth2/v3/userinfo";
@@ -118,7 +118,7 @@ namespace Daekage.Services
             // sends the request
             var userinfoRequest = (HttpWebRequest)WebRequest.Create(userinfoRequestUri);
             userinfoRequest.Method = "GET";
-            userinfoRequest.Headers.Add($"Authorization: Bearer {App.Current.Properties["AccessToken"]}");
+            userinfoRequest.Headers.Add($"Authorization: Bearer {Application.Current.Properties["AccessToken"]}");
             userinfoRequest.ContentType = "application/x-www-form-urlencoded";
             userinfoRequest.Accept = "Accept=text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
 
@@ -130,7 +130,7 @@ namespace Daekage.Services
                 // reads response body
                 string userinfoResponseText = await userinfoResponseReader.ReadToEndAsync();
 
-                App.Current.Properties["Userinfo"] = JsonConvert.DeserializeObject<UserinfoModel>(userinfoResponseText);
+                Application.Current.Properties["Userinfo"] = JsonConvert.DeserializeObject<UserinfoModel>(userinfoResponseText);
             }
             catch (WebException)
             {
@@ -171,9 +171,9 @@ namespace Daekage.Services
                 // converts to dictionary
                 var tokenEndpointDecoded = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseText);
 
-                App.Current.Properties["AccessToken"] = tokenEndpointDecoded?["access_token"];
+                Application.Current.Properties["AccessToken"] = tokenEndpointDecoded?["access_token"];
                 if (!string.IsNullOrEmpty(tokenEndpointDecoded?["refresh_token"]))
-                    App.Current.Properties["RefreshToken"] = tokenEndpointDecoded["refresh_token"];
+                    Application.Current.Properties["RefreshToken"] = tokenEndpointDecoded["refresh_token"];
             }
             catch (WebException ex)
             {
@@ -190,15 +190,15 @@ namespace Daekage.Services
             }
         }
 
-        private async Task RefreshToken()
+        private static async Task RefreshToken()
         {
-            App.Current.Properties["AccessToken"] = string.Empty;
+            Application.Current.Properties["AccessToken"] = string.Empty;
 
             // builds the  request
             string tokenRequestBody = string.Format("client_id={0}&client_secret={1}&refresh_token={2}&scope=&grant_type=refresh_token",
                 CLIENT_ID,
                 CLIENT_SECRET,
-                App.Current.Properties["RefreshToken"]);
+                Application.Current.Properties["RefreshToken"]);
 
             // sends the request
             var tokenRequest = (HttpWebRequest)WebRequest.Create(TOKEN_REQUEST_URI);
@@ -226,7 +226,7 @@ namespace Daekage.Services
 
                 if (!string.IsNullOrEmpty(accessToken))
                 {
-                    App.Current.Properties["AccessToken"] = accessToken;
+                    Application.Current.Properties["AccessToken"] = accessToken;
                     await UserinfoCall();
                     return;
                 }
@@ -245,8 +245,8 @@ namespace Daekage.Services
                 }
             }
 
-            App.Current.Properties.Remove("Userinfo");
-            App.Current.Properties.Remove("RefreshToken");
+            Application.Current.Properties.Remove("Userinfo");
+            Application.Current.Properties.Remove("RefreshToken");
         }
     }
 }

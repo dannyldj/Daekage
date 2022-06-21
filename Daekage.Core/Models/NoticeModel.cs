@@ -7,12 +7,12 @@ namespace Daekage.Core.Models
 {
     public class NoticeModel
     {
-        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("Id")]
         public string Key { get; set; }
 
         public string Writer { get; set; }
 
-        [JsonProperty("sender")]
+        [JsonProperty("Sender")]
         public string WriterEmail { get; set; }
 
         public string Date { get; set; }

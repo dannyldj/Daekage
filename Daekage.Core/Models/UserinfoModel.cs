@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.ComponentModel.Design.Serialization;
+using Newtonsoft.Json;
 
 namespace Daekage.Core.Models
 {

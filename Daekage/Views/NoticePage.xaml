@@ -32,55 +32,95 @@
                 VerticalScrollBarVisibility="Auto"
                 Margin="{StaticResource SmallLeftTopRightMargin}">
                 <ItemsControl
-                    ItemsSource="{Binding NoticeList}"
+                    ItemsSource="{Binding Notices}"
                     Margin="{StaticResource SmallLeftTopRightMargin}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="models:NoticeModel">
-                            <StackPanel>
-                                <TextBlock
-                                    Text="{Binding Writer}"
-                                    FontSize="{StaticResource SmallFontSize}"
-                                    FontWeight="SemiBold"
-                                    Style="{StaticResource BaseTextBlockStyle}"
-                                    Margin="{StaticResource XXXSmallBottomMargin}"/>
-                                <TextBlock
-                                    Text="{Binding Date}"
-                                    FontSize="{StaticResource SmallFontSize}"
-                                    Style="{StaticResource BaseTextBlockStyle}"
-                                    Margin="{StaticResource SmallBottomMargin}"
-                                    Opacity="0.5"/>
-                                <ItemsControl
-                                    ItemsSource="{Binding Files}"
-                                    Visibility="{Binding IsFilesEmpty,
-                                        Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    Margin="{StaticResource SmallBottomMargin}">
-                                    <ItemsControl.ItemsPanel>
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock
+                                        Text="{Binding Writer}"
+                                        FontSize="{StaticResource SmallFontSize}"
+                                        FontWeight="SemiBold"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        Margin="{StaticResource XXXSmallBottomMargin}"/>
+                                    <TextBlock
+                                        Text="{Binding Date}"
+                                        FontSize="{StaticResource SmallFontSize}"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        Margin="{StaticResource SmallBottomMargin}"
+                                        Opacity="0.5"/>
+                                    <ItemsControl
+                                        ItemsSource="{Binding Files}"
+                                        Visibility="{Binding IsFilesEmpty,
+                                            Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Margin="{StaticResource SmallBottomMargin}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button
+                                                    BorderThickness="0.5"
+                                                    Margin="{StaticResource XXSmallRightMargin}">
+                                                    <TextBlock
+                                                        Text="{Binding}"
+                                                        FontSize="{StaticResource SmallFontSize}"
+                                                        FontWeight="Medium"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock
+                                        Text="{Binding Text}"
+                                        FontWeight="SemiBold"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        Margin="{StaticResource SmallBottomMargin}"/>
+                                    <Separator
+                                        Opacity="0.5"
+                                        Margin="{StaticResource SmallBottomMargin}"/>
+                                </StackPanel>
+                                <controls:DropDownButton
+                                    ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl},
+                                        Path=DataContext.DropDownItems}"
+                                    ButtonStyle="{StaticResource MahApps.Styles.Button.Reveal}"
+                                    BorderThickness="{StaticResource NoneLine}"
+                                    ArrowVisibility="Collapsed"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Right">
+                                    <controls:DropDownButton.Content>
+                                        <controls:FontIcon Glyph="&#xE712;" />
+                                    </controls:DropDownButton.Content>
+                                    <controls:DropDownButton.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"/>
+                                            <StackPanel Margin="-20,0,0,0" />
                                         </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button
-                                                BorderThickness="0.5"
-                                                Margin="{StaticResource XXSmallRightMargin}">
-                                                <TextBlock
-                                                    Text="{Binding}"
-                                                    FontSize="{StaticResource SmallFontSize}"
-                                                    FontWeight="Medium"/>
-                                            </Button>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                                <TextBlock
-                                    Text="{Binding Text}"
-                                    FontWeight="SemiBold"
-                                    Style="{StaticResource BaseTextBlockStyle}"
-                                    Margin="{StaticResource SmallBottomMargin}"/>
-                                <Separator
-                                    Opacity="0.5"
-                                    Margin="{StaticResource SmallBottomMargin}"/>
-                            </StackPanel>
+                                    </controls:DropDownButton.ItemsPanel>
+                                    <controls:DropDownButton.ItemContainerStyle>
+                                        <Style TargetType="{x:Type MenuItem}">
+                                            <Setter Property="Header" Value="{Binding Title}" />
+                                            <Setter Property="Command" Value="{Binding Command}" />
+                                            <Setter
+                                                Property="CommandParameter"
+                                                Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:DropDownButton},
+                                                    Path=DataContext}" />
+                                        </Style>
+                                    </controls:DropDownButton.ItemContainerStyle>
+                                    <controls:DropDownButton.Style>
+                                        <Style TargetType="{x:Type controls:DropDownButton}">
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl},
+                                                        Path=DataContext.IsTeacher}" Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </controls:DropDownButton.Style>
+                                </controls:DropDownButton>
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -98,12 +138,13 @@
                     Glyph="&#xE710;"
                     Foreground="{DynamicResource MahApps.Brushes.Control.Background}" />
                 <Button.Style>
-                    <Style
-                        TargetType="{x:Type Button}"
-                        BasedOn="{StaticResource OverHandButtonStyle}">
-                        <Setter
-                            Property="Border.CornerRadius"
-                            Value="100" />
+                    <Style TargetType="{x:Type Button}"
+                           BasedOn="{StaticResource MahApps.Styles.Button.Circle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsTeacher}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>

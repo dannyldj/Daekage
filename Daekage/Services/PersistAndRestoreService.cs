@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
-
+using System.Windows;
 using Daekage.Contracts.Services;
 using Daekage.Core.Contracts.Services;
 using Daekage.Models;
@@ -22,24 +22,21 @@ namespace Daekage.Services
 
         public void PersistData()
         {
-            if (App.Current.Properties != null)
-            {
-                var folderPath = Path.Combine(_localAppData, _appConfig.ConfigurationsFolder);
-                var fileName = _appConfig.AppPropertiesFileName;
-                _fileService.Save(folderPath, fileName, App.Current.Properties);
-            }
+            string folderPath = Path.Combine(_localAppData, _appConfig.ConfigurationsFolder);
+            string fileName = _appConfig.AppPropertiesFileName;
+            _fileService.Save(folderPath, fileName, Application.Current.Properties);
         }
 
         public void RestoreData()
         {
-            var folderPath = Path.Combine(_localAppData, _appConfig.ConfigurationsFolder);
-            var fileName = _appConfig.AppPropertiesFileName;
+            string folderPath = Path.Combine(_localAppData, _appConfig.ConfigurationsFolder);
+            string fileName = _appConfig.AppPropertiesFileName;
             var properties = _fileService.Read<IDictionary>(folderPath, fileName);
             if (properties != null)
             {
                 foreach (DictionaryEntry property in properties)
                 {
-                    App.Current.Properties.Add(property.Key, property.Value);
+                    Application.Current.Properties.Add(property.Key, property.Value);
                 }
             }
         }

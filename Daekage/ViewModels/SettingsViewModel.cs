@@ -6,6 +6,7 @@ using Daekage.Contracts.Services;
 using Daekage.Core.Models;
 using Daekage.Models;
 using Daekage.Properties;
+using Daekage.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -19,7 +20,6 @@ namespace Daekage.ViewModels
         private readonly IThemeSelectorService _themeSelectorService;
         private readonly ISystemService _systemService;
         private readonly IApplicationInfoService _applicationInfoService;
-        private readonly IOAuthService _oAuthService;
         private AppTheme _theme;
         private string _versionDescription;
         private UserinfoModel _userinfo;
@@ -61,13 +61,12 @@ namespace Daekage.ViewModels
         public ICommand PrivacyStatementCommand => _privacyStatementCommand ??= new DelegateCommand(OnPrivacyStatement);
 
         public SettingsViewModel(AppConfig appConfig, IThemeSelectorService themeSelectorService,
-            ISystemService systemService, IApplicationInfoService applicationInfoService, IOAuthService oAuthService)
+            ISystemService systemService, IApplicationInfoService applicationInfoService)
         {
             _appConfig = appConfig;
             _themeSelectorService = themeSelectorService;
             _systemService = systemService;
             _applicationInfoService = applicationInfoService;
-            _oAuthService = oAuthService;
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -75,7 +74,7 @@ namespace Daekage.ViewModels
             VersionDescription = $"{Properties.Resources.AppDisplayName} - {_applicationInfoService.GetVersion()}";
             Theme = _themeSelectorService.GetCurrentTheme();
 
-            object userinfo = App.Current.Properties["Userinfo"];
+            object userinfo = Application.Current.Properties["Userinfo"];
             if (userinfo is { })
             {
                 Userinfo = userinfo as UserinfoModel;
@@ -88,8 +87,8 @@ namespace Daekage.ViewModels
 
         private async void OnAuth()
         {
-            await _oAuthService.GoogleAuth();
-            var userinfo = App.Current.Properties["Userinfo"] as UserinfoModel;
+            await OAuthService.GoogleAuth();
+            var userinfo = Application.Current.Properties["Userinfo"] as UserinfoModel;
 
             if (userinfo?.Domain != "dgsw.hs.kr")
             {
@@ -103,9 +102,9 @@ namespace Daekage.ViewModels
 
         private void OnLogout()
         {
-            App.Current.Properties.Remove("Userinfo");
-            App.Current.Properties.Remove("AccessToken");
-            App.Current.Properties.Remove("RefreshToken");
+            Application.Current.Properties.Remove("Userinfo");
+            Application.Current.Properties.Remove("AccessToken");
+            Application.Current.Properties.Remove("RefreshToken");
 
             Userinfo = null;
         }
